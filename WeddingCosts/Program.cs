@@ -44,9 +44,9 @@ namespace WeddingCosts
                 {
                     Console.WriteLine("That is not a valid cost");
                 }
-                Console.WriteLine("Continue? Y or N");
+                Console.WriteLine("Press Q to quit or any key to continue");
                 string userChoice = Console.ReadLine();
-                    if (userChoice == "N")
+                    if (userChoice == "Q")
                 {
                     userWantsToExit = true;
                 }
