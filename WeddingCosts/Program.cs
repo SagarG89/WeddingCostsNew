@@ -58,7 +58,7 @@ namespace WeddingCosts
                         {
                             Console.WriteLine("That is not a valid cost");
                         }
-                        Console.WriteLine("Press Q to quit or any key to continue");
+                        Console.WriteLine("Press Q to quit or any key to return");
                         string userQuitView = Console.ReadLine();
                         if (userQuitView == "Q")
                         {
@@ -75,22 +75,30 @@ namespace WeddingCosts
                     Console.WriteLine("Please write the Name and Cost (ex. Name, Cost)");
                     string newName = Console.ReadLine();
 
-                    //adds to file but want to add above Total. Also does not show after when trying to view.
+                    //adds to file but wanted to add above Total. Not sure CSV can do maths operations so deleted total. Also does not show after when trying to view without typing the full entry.
                     while (!userWantsToAddCost)
                     {
-                        using (FileStream fs = new FileStream(filePath, FileMode.Append, FileAccess.Write))
+                        if (bookings.ContainsKey(newName))
                         {
-                            using (StreamWriter sw = new StreamWriter(fs))
+                                using (FileStream fs = new FileStream(filePath, FileMode.Append, FileAccess.Write))
                             {
-                                sw.WriteLine(newName);
+                                using (StreamWriter sw = new StreamWriter(fs))
+                                {
+                                    sw.WriteLine(newName);
+                                }
                             }
                         }
-                        Console.WriteLine("Press Q to quit or any key to continue");
+
+                        Console.WriteLine("Press Q to quit or any key to return");
                         string userQuitAdd = Console.ReadLine();
                         if (userQuitAdd == "Q")
                         {
                             userWantsToAddCost = true;
-                            readOrAddCost = true;
+                            if (userWantsToAddCost == false)
+                            {
+                                readOrAddCost = true;
+                            }
+                            
                         }
                     }
                 }
