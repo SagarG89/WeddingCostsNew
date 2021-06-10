@@ -28,6 +28,7 @@ namespace WeddingCosts
             bool readOrAddCost = false;
             bool userWantsToViewCosts = false;
             bool userWantsToAddCost = false;
+            bool userWantsToDeleteCost = false;
            
             
 
@@ -39,7 +40,7 @@ namespace WeddingCosts
 
             while (!readOrAddCost)
             {
-                Console.WriteLine("Press V to View Costs or A to add.");
+                Console.WriteLine("Press V to View Costs,  A to add or D to Delete.");
                 string userChoice = Console.ReadLine();
 
                 if (userChoice == "V")
@@ -80,7 +81,7 @@ namespace WeddingCosts
                     {
                         if (bookings.ContainsKey(newName))
                         {
-                                using (FileStream fs = new FileStream(filePath, FileMode.Append, FileAccess.Write))
+                            using (FileStream fs = new FileStream(filePath, FileMode.Append, FileAccess.Write))
                             {
                                 using (StreamWriter sw = new StreamWriter(fs))
                                 {
@@ -98,10 +99,41 @@ namespace WeddingCosts
                             {
                                 readOrAddCost = true;
                             }
-                            
+
                         }
                     }
                 }
+                    if (userChoice == "D")
+                    {
+                        Console.WriteLine("Write the name of the Record you wish to Delete");
+                        string deleteLine = Console.ReadLine();
+
+                        //deletes line from file (NOT FUNCTIONING)
+                        while (!userWantsToDeleteCost)
+                        {
+                            if (deleteLine.Contains(deleteLine))
+                            {
+                                while (filePath.Contains(deleteLine))
+                                {
+                                    bookings.Remove(deleteLine);
+                                }
+
+                               
+                            }
+                            Console.WriteLine("Press Q to quit or any key to return");
+                            string userQuitDelete = Console.ReadLine();
+                            if (userQuitDelete == "Q")
+                            {
+                                userWantsToDeleteCost = true;
+                                if (userWantsToDeleteCost == false)
+                                {
+                                    readOrAddCost = true;
+                                }
+
+                            }
+                        }
+                    }
+                
 
             }
          
