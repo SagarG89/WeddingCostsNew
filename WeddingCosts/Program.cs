@@ -75,32 +75,43 @@ namespace WeddingCosts
                 {
                     Console.WriteLine("Please write the Name and Cost (ex. Name, Cost)");
                     string newName = Console.ReadLine();
+                    bool quitAdd = false;
+                
 
                     //adds to file but wanted to add above Total. Not sure CSV can do maths operations so deleted total. Also does not show after when trying to view without typing the full entry.
                     while (!userWantsToAddCost)
                     {
-                        if (bookings.ContainsKey(newName))
-                        {
+
+                       
                             using (FileStream fs = new FileStream(filePath, FileMode.Append, FileAccess.Write))
                             {
                                 using (StreamWriter sw = new StreamWriter(fs))
                                 {
+                                    Console.WriteLine($"{newName} added Successfully.");
                                     sw.WriteLine(newName);
                                 }
                             }
-                        }
 
-                        Console.WriteLine("Press Q to quit or any key to return");
-                        string userQuitAdd = Console.ReadLine();
-                        if (userQuitAdd == "Q")
+                        Console.WriteLine("Press Q to quit");
+                        while (!quitAdd)
                         {
-                            userWantsToAddCost = true;
-                            if (userWantsToAddCost == false)
+                            string userQuitAdd = Console.ReadLine();
+                            if (userQuitAdd == "Q")
                             {
+                                userWantsToAddCost = true;
                                 readOrAddCost = true;
+                                quitAdd = true;
                             }
-
+                            else
+                            {
+                                Console.WriteLine("Press Q to quit!");
+                            }
                         }
+                        
+
+                      
+
+                      
                     }
                 }
                     if (userChoice == "D")
@@ -125,11 +136,8 @@ namespace WeddingCosts
                             if (userQuitDelete == "Q")
                             {
                                 userWantsToDeleteCost = true;
-                                if (userWantsToDeleteCost == false)
-                                {
-                                    readOrAddCost = true;
-                                }
-
+                            readOrAddCost = true;
+                               
                             }
                         }
                     }
