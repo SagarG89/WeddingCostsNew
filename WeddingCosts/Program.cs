@@ -108,7 +108,7 @@ namespace WeddingCosts
                         Console.WriteLine("Write the name of the Record you wish to Delete");
                         string deleteLine = Console.ReadLine();
 
-                        //deletes line from file (NOT FUNCTIONING)
+                        //deletes line from file (NOT FUNCTIONING. 
                         while (!userWantsToDeleteCost)
                         {
                             if (deleteLine.Contains(deleteLine))
