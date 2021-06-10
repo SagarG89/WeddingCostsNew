@@ -13,7 +13,7 @@ namespace WeddingCosts
 
         private string _csvFilePath;
 
-        public CsvReader (string csvFilePath)
+        public CsvReader(string csvFilePath)
         {
             this._csvFilePath = csvFilePath;
         }
@@ -27,7 +27,7 @@ namespace WeddingCosts
                 sr.ReadLine();
 
                 string bookCostLine;
-                while ((bookCostLine = sr.ReadLine())!=null)
+                while ((bookCostLine = sr.ReadLine()) != null)
                 {
                     BookingCosts booking = ReadBookingFromCsv(bookCostLine);
                     if (costs.ContainsKey(booking.Booking))
@@ -41,7 +41,7 @@ namespace WeddingCosts
 
                     }
                 }
-                    
+
             }
 
             return costs;
@@ -58,6 +58,31 @@ namespace WeddingCosts
             int.TryParse(cost, out int expense);
             return new BookingCosts(booking, expense);
         }
-        
+
+        public static void ReadFromCsv(ref bool readOrAddCost, ref bool userWantsToViewCosts, Dictionary<string, List<BookingCosts>> bookings)
+        {
+            Console.Write("Which of the costs do you wish to see? ");
+            string chosenBooking = Console.ReadLine();
+
+            if (bookings.ContainsKey(chosenBooking))
+            {
+                foreach (BookingCosts booking in bookings[chosenBooking].Take(1))
+                    Console.WriteLine($"The cost of {booking.Booking} is £{booking.Cost}");
+            }
+            else
+            {
+                Console.WriteLine("That is not a valid cost");
+            }
+            Console.WriteLine("Press Q to quit or any key to return");
+            string userQuitView = Console.ReadLine();
+            if (userQuitView == "Q")
+            {
+                userWantsToViewCosts = true;
+                readOrAddCost = true;
+            }
+        }
     }
-}
+    }
+
+
+

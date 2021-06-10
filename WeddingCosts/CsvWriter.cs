@@ -6,34 +6,38 @@ using System.Threading.Tasks;
 using System.IO;
 using CsvHelper;
 
-//namespace WeddingCosts
-//{
-//    class CsvWriter
-//    {
-//        private string _csvFilePath;
+namespace WeddingCosts
+{
+    class CsvWriter
+    {
+        public static void WriteToCSV(string filePath, ref bool readOrAddCost, ref bool userWantsToAddCost, string newName, ref bool quitAdd)
+        {
+            using (FileStream fs = new FileStream(filePath, FileMode.Append, FileAccess.Write))
+            {
+                using (StreamWriter sw = new StreamWriter(fs))
+                {
+                    Console.WriteLine($"{newName} added Successfully.");
+                    sw.WriteLine(newName);
+                }
+            }
 
-//        public CsvWriter(string csvFilePath)
-//        {
-//            this._csvFilePath = csvFilePath;
-//        }
+            Console.WriteLine("Press Q to quit");
+            while (!quitAdd)
+            {
+                string userQuitAdd = Console.ReadLine();
+                if (userQuitAdd == "Q")
+                {
+                    userWantsToAddCost = true;
+                    readOrAddCost = true;
+                    quitAdd = true;
+                }
+                else
+                {
+                    Console.WriteLine("Press Q to quit!");
+                }
+            }
 
-//        //public Dictionary<string, List<BookingCosts>> AddBookingCost()
-        //{
-        //    var costs = new Dictionary<string, List<BookingCosts>>();
+        }
 
-        //    using StreamWriter sw = new StreamWriter(_csvFilePath))
-        //        {
-        //        sw.ReadLine();
-
-        //        string bookCostLine;
-        //        while ((bookCostLine = sw.ReadLine()) !=null)
-        //        {
-//        //            BookingCosts.booking = AddToCsv(bookCostLine);
-//        //            File.
-//        //        }
-//            }
-//        }
-
-
-//    }
-//}
+    }
+}
